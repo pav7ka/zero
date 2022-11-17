@@ -1,0 +1,6 @@
+^/dev/hd
+^/dev/sd
+^/dev/nvme
+^/dev/mapper
+^/dev/zvol
+^zfs
