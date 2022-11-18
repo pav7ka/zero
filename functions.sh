@@ -44,7 +44,7 @@ check_exist_file() {
   exist_file "z_touch.list"
 }
 
-### проверям пустые ли конфигурационные файлы
+### проверяем пустые ли конфигурационные файлы
 check_empty_file() {
   empty_file "device.list" && \
   empty_file "z_server.list" && \

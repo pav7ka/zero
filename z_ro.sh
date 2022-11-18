@@ -13,7 +13,8 @@ check_read_file
 if [ ! "$GREP_DEV" = "" ]
 then
   z_sender "ro_fs" "$GREP_DEV"
-#else
+else
+  z_sender "ro_fs" ""
 #  echo "атрибут ro в /proc/mounts отсутствует"
 fi
 
@@ -38,7 +39,7 @@ then
       logf "каталога $TCH не существует"
     fi
   done
-z_sender "ro_touch" "${BAD_TOUCH[*]}"
+  z_sender "ro_touch" "${BAD_TOUCH[*]}"
 #else
 #  echo "файл z_touch.list пустой, нечего проверять"
 fi

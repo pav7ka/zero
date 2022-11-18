@@ -16,7 +16,7 @@ LOG_DATE=`date +%F_%T` #%H-%M-%ss`
 GREP_DEV=`( cat /proc/mounts | grep -s --file=device.list -s | grep -s "ro," ) 2> /dev/null`
 ### массив серверов из файла (один IP на строку)
 readarray ZSERVERS < z_server.list
-### имя хоста которое должно совпадать с именем в zabbix
+### имя хоста , которое должно совпадать с именем хоста в zabbix
 ### можно использовать программу hostname если имена совпадают
 read -r ZHOSTNAME < z_hostname
 ### массив каталогов где тачить файлы (один каталог на строку)
