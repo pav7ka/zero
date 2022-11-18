@@ -81,7 +81,7 @@ z_hostname() {
   0 )
     if exist_file "z_hostname" && empty_file "z_hostname" && read_file "z_hostname"
     then
-      read -r ZHOSTNAME < z_hostname
+      ZHOSTNAME=$( head -n1 z_hostname | sed -e 's/^[ \t]*//;s/[ \t]*$//' )
     else
       logf "HNAME указан '0' но чтото пошлое не так"
       exit 1
@@ -92,7 +92,7 @@ z_hostname() {
     if exist_file "$ZA_FILE" && read_file "$ZA_FILE"
     then
       ### -i grep специально не ставил , убираем (на всякий случай) в начале и в конце пробелы табуляцию
-      ZHOSTNAME=$( cat $ZA_FILE | grep "Hostname=" | grep -v "^#" | awk -F "=" '{print $2}' | sed 's/^[ \t]*//' | sed 's/[ \t]*$//' )
+      ZHOSTNAME=$( cat $ZA_FILE | grep "Hostname=" | grep -v "^#" | awk -F "=" '{print $2}' | sed -e 's/^[ \t]*//;s/[ \t]*$//' )
       if [ "$ZHOSTNAME" = "" ]
       then
         logf "имя хоста пустое в файле $ZA_FILE"

@@ -18,7 +18,7 @@ GREP_DEV=`( cat /proc/mounts | grep -s --file=device.list -s | grep -s "ro," ) 2
 readarray ZSERVERS < z_server.list
 ### имя хоста , которое должно совпадать с именем хоста в zabbix
 ### HNAME 0 читаем из файла, 1 берем из заббикс агента, 2 берем из хостнейм
-HNAME="1"
+HNAME="0"
 ZHOSTNAME=""
 ZA_FILE="/etc/zabbix/zabbix_agentd.conf"
 #read -r ZHOSTNAME < z_hostname
