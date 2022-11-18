@@ -3,7 +3,7 @@
 ### имя файла для логов
 LOG_FILE="zloi"
 ### программа отправки данных в zabbix
-SENDER="/usr/local/bin/zabbix_sender"
+SENDER="/bin/zabbix_sender"
 ### файл который будет тачить
 ZTCH="zaebix"
 ### массив каталогов , которые не прошли проверку
@@ -17,7 +17,10 @@ GREP_DEV=`( cat /proc/mounts | grep -s --file=device.list -s | grep -s "ro," ) 2
 ### массив серверов из файла (один IP на строку)
 readarray ZSERVERS < z_server.list
 ### имя хоста , которое должно совпадать с именем хоста в zabbix
-### можно использовать программу hostname если имена совпадают
-read -r ZHOSTNAME < z_hostname
+### HNAME 0 читаем из файла, 1 берем из заббикс агента, 2 берем из хостнейм
+HNAME="1"
+ZHOSTNAME=""
+ZA_FILE="/etc/zabbix/zabbix_agentd.conf"
+#read -r ZHOSTNAME < z_hostname
 ### массив каталогов где тачить файлы (один каталог на строку)
 readarray ZTOUCH < z_touch.list

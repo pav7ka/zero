@@ -9,6 +9,8 @@ check_exist_file
 check_empty_file
 check_read_file
 
+z_hostname
+
 ### проверяем , есть ли атрибут "ro" в файле /proc/mounts
 if [ ! "$GREP_DEV" = "" ]
 then
@@ -43,5 +45,7 @@ then
 #else
 #  echo "файл z_touch.list пустой, нечего проверять"
 fi
+
+echo $ZHOSTNAME
 
 exit 0

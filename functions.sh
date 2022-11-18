@@ -40,15 +40,15 @@ check_exist_file() {
 #  exist_file $SENDER && \
   exist_file "device.list" && \
   exist_file "z_server.list" && \
-  exist_file "z_hostname" && \
+#  exist_file "z_hostname" && \
   exist_file "z_touch.list"
 }
 
 ### проверяем пустые ли конфигурационные файлы
 check_empty_file() {
   empty_file "device.list" && \
-  empty_file "z_server.list" && \
-  empty_file "z_hostname" #&& \
+  empty_file "z_server.list" # && \
+#  empty_file "z_hostname" #&& \
 #  empty_file "z_touch.file"
 }
 
@@ -56,7 +56,7 @@ check_empty_file() {
 check_read_file() {
   read_file "device.list" && \
   read_file "z_server.list" && \
-  read_file "z_hostname" && \
+#  read_file "z_hostname" && \
   read_file "z_touch.list"
 }
 
@@ -72,4 +72,44 @@ z_sender() {
 #    $SENDER -z $SRV -s $ZHOSTNAME -k "$1" -o "$2"
     echo "-z $SRV -s $ZHOSTNAME -k "$1" -o "$2"" # "$GRP""
   done
+}
+
+### ZHOSTNAME
+z_hostname() {
+  case "$HNAME" in
+### читаем из файла
+  0 )
+    if exist_file "z_hostname" && empty_file "z_hostname" && read_file "z_hostname"
+    then
+      read -r ZHOSTNAME < z_hostname
+    else
+      logf "HNAME указан '0' но чтото пошлое не так"
+      exit 1
+    fi
+  ;;
+### берем из заббикс агента
+  1 )
+    if exist_file "$ZA_FILE" && read_file "$ZA_FILE"
+    then
+      ### -i grep специально не ставил , убираем (на всякий случай) в начале и в конце пробелы табуляцию
+      ZHOSTNAME=$( cat $ZA_FILE | grep "Hostname=" | grep -v "^#" | awk -F "=" '{print $2}' | sed 's/^[ \t]*//' | sed 's/[ \t]*$//' )
+      if [ "$ZHOSTNAME" = "" ]
+      then
+        logf "имя хоста пустое в файле $ZA_FILE"
+        exit 1
+      fi
+    else
+      logf "чтото пошло не так с чтением имени хоста из конфига заббикс агента\nнадеюсь, до выполнения этого кода не дойдет выполнение >_< =D"
+    fi
+  ;;
+### hostname
+  2 )
+    ZHOSTNAME=`hostname`
+  ;;
+### какая то хрень
+  * )
+    logf "недопустимое значение переменной HNAME"
+    exit 1
+  ;;
+  esac
 }
