@@ -105,6 +105,11 @@ z_hostname() {
 ### hostname
   2 )
     ZHOSTNAME=`hostname`
+    if [ "$ZHOSTNAME" = "" ]
+    then
+      logf "имя хоста пустое в файле /etc/hostname"
+      exit 1
+    fi
   ;;
 ### какая то хрень
   * )

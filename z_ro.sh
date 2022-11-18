@@ -46,6 +46,4 @@ then
 #  echo "файл z_touch.list пустой, нечего проверять"
 fi
 
-echo $ZHOSTNAME
-
 exit 0
