@@ -10,6 +10,7 @@ check_empty_file
 check_read_file
 
 z_hostname
+validIP
 
 ### проверяем , есть ли атрибут "ro" в файле /proc/mounts
 if [ ! "$GREP_DEV" = "" ]

@@ -118,3 +118,21 @@ z_hostname() {
   ;;
   esac
 }
+
+### validIP
+validIP() {
+  if exist_file "z_server.list" && empty_file "z_server.list" && read_file "z_server.list"
+  then
+    for SRV in ${ZSERVERS[@]}
+    do
+      readarray -td "." ZS <<< $SRV
+      if ! [[ $SRV =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ && ${ZS[0]} -le 255 && ${ZS[1]} -le 255 && ${ZS[2]} -le 255 && ${ZS[3]} -le 255 ]]
+      then
+        logf "ip $SRV неправильный"
+        exit 1
+#      else
+#        echo "ip $SRV правильный"
+      fi
+    done
+  fi
+}
