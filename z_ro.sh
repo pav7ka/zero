@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# проверка запуска от рута , нужна ли ?
-
 source variables.sh
 source functions.sh
 
