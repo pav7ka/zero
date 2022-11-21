@@ -29,16 +29,23 @@ https://support.zabbix.com/browse/ZBXNEXT-1616
 
 #### cron
 От рута тогда используем sudo, если от пользователя без, но тогда не все каталоги сможет выполнить touch. Имейте это ввиду.
+
 sudo crontab -e
+
 */5 * * * * cd /path/to/script && ./z_ro.sh #>> ./cron_log 2>&1
 
-#### zabbix эдемент данных
-ro_fs 
+#### zabbix элемент данных
+ro_fs
+
 Zabbix траппер
+
 Текст
 
+
 ro_touch
+
 Zabbix траппер
+
 Текст
 
 #### zabbix триггер
