@@ -5,6 +5,8 @@
 source variables.sh
 source functions.sh
 
+groot
+
 check_exist_file
 check_empty_file
 check_read_file
@@ -42,7 +44,12 @@ then
       logf "каталога $TCH не существует"
     fi
   done
-  z_sender "ro_touch" "${BAD_TOUCH[*]}"
+  if [[ ! ${#BAD_TOUCH[@]} -eq 0 ]]
+  then
+    z_sender "ro_touch" "${BAD_TOUCH[*]}"
+  else
+    z_sender "ro_touch" ""
+  fi
 #else
 #  echo "файл z_touch.list пустой, нечего проверять"
 fi

@@ -37,7 +37,7 @@ read_file() {
 
 ### проверяем сущуствуют ли конфигурационные файлы
 check_exist_file() {
-#  exist_file $SENDER && \
+  exist_file $SENDER && \
   exist_file "device.list" && \
   exist_file "z_server.list" && \
 #  exist_file "z_hostname" && \
@@ -69,8 +69,8 @@ check_touch() {
 z_sender() {
   for SRV in ${ZSERVERS[@]}
   do
-#    $SENDER -z $SRV -s $ZHOSTNAME -k "$1" -o "$2"
-    echo "-z $SRV -s $ZHOSTNAME -k "$1" -o "$2"" # "$GRP""
+    $SENDER -z $SRV -s $ZHOSTNAME -k "$1" -o "$2" # для отладки использовать ключ -vv
+#    echo "-z $SRV -s $ZHOSTNAME -k "$1" -o "$2"" # "$GRP""
   done
 }
 
@@ -134,5 +134,15 @@ validIP() {
 #        echo "ip $SRV правильный"
       fi
     done
+  fi
+}
+
+groot() {
+  if [[ $EUID -ne 0 ]]
+  then
+    `touch -a "I_am_Groot"`
+    #logf "i am Groot, и, возможно, не смогу сделать touch file во всех каталогах"
+  else
+    `rm -f ./"I_am_Groot"`
   fi
 }
