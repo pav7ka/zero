@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <date>2022-11-24T06:36:29Z</date>
+    <groups>
+        <group>
+            <name>Templates/Operating systems</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Linux filesystems read-only mode</template>
+            <name>Template Linux filesystems read-only mode</name>
+            <description>Шаблон элементов данных и триггеров работающий в связке со скриптом https://github.com/pav7ka/zero</description>
+            <groups>
+                <group>
+                    <name>Templates/Operating systems</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>filesystems RO</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>ro_fs</name>
+                    <type>TRAP</type>
+                    <key>ro_fs</key>
+                    <delay>0</delay>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <applications>
+                        <application>
+                            <name>filesystems RO</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{strlen()}&lt;&gt;0</expression>
+                            <name>ro_fs</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>ro_touch</name>
+                    <type>TRAP</type>
+                    <key>ro_touch</key>
+                    <delay>0</delay>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <applications>
+                        <application>
+                            <name>filesystems RO</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{strlen()}&lt;&gt;0</expression>
+                            <name>ro_touch</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+        </template>
+    </templates>
+</zabbix_export>
