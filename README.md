@@ -45,4 +45,4 @@ sudo crontab -e
 {ubuntu_test:ro_touch.strlen()}<>0
 
 #### zabbix шаблон
-В комплекте прилагается шаблон zbx_templates.xml , созданный в версии 5.0.x. Импортируете и навешиваете на хост или группу хостов.
+В комплекте прилагается шаблон "Template Linux filesystems read-only mode" ( zbx_templates.xml ), созданный в версии 5.0.x. Импортируете и навешиваете на хост или группу хостов.
